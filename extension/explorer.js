@@ -449,6 +449,13 @@ class Interest extends SegmentsPanel {
                 //.where({ version: currentVersion, type: this.type, status: this.status })
                 .where({ type: this.type, status: this.status })
                 .count();
+
+            // Add by yyy 添加看过、想看的总数
+            let $span = $(`a[data-type=${this.type}][data-status=${this.status}] .type-name`);
+            if (!$span.hasClass('added')) {
+                $span.text(`(${total})`);
+                $span.addClass('added');
+            }
         }
         storage.local.close();
         for (let {interest, version} of collection) {
