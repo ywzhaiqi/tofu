@@ -1464,7 +1464,7 @@ class Exporter {
                 let collection = storage.local.interest
                     .where({ type: type, status: status })
                     .reverse();
-                let data = [['标题', '简介', '豆瓣评分', '链接', '创建时间', '我的评分', '标签', '评论']];
+                let data = [['标题', '简介', '豆瓣评分', '评价人数', '链接', '创建时间', '我的评分', '标签', '评论']];
                 await collection.each(row => {
                     let {
                         subject,
@@ -1477,6 +1477,7 @@ class Exporter {
                         subject.title,
                         subject.card_subtitle,
                         subject.rating.value.toFixed(1),
+                        subject.rating.count,
                         subject.url,
                         create_time,
                         rating ? rating.value : '',
